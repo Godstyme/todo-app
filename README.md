@@ -1,18 +1,21 @@
 ## A Simple TODO-APP
 This project provides a basic introduction to the Laravel framework and includes content on the following concepts:
-- basic CRUD system, 
-- views using Blade templates.
-- controller and models,
-- input validation,
-- database migrations and 
-- pagination
+- Basic CRUD system with Eloquent ORM approach, 
+- Views using Blade templates engine.
+- Controller and models,
+- Input validation,
+- Database migrations
+- View route, post route and get route
+- Pagination and 
+- CSRF Protection
+
 ## Quick Installation
 First, clone repo and install all dependencies.
 ```sh
 $ git clone https://github.com/Godstyme/todo-app.git
 $ cd todo-app
 $ composer install
-$ php artisan server
+$ php artisan serve
 ```
 You're ready to go! :)
 
