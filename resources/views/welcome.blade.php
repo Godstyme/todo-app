@@ -36,8 +36,18 @@
                                 <button class="btn btn-outline-primary" type="submit">Create</button>
                             </div>
                         </form>
-                        <div class="table-responsive pt-5">
-                            <caption>Todo Tasks</caption>
+                        <div class="table-responsive pt-5">            
+                            <div class="navbar bg-light">
+                                <div class="container-fluid">
+                                  <a class="navbar-brand">
+                                    <caption>Todo Tasks</caption>
+                                  </a>
+                                  <form class="d-flex" role="search">
+                                    <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                                  </form>
+                                </div>
+                            </div>
                             <table class="table  table-bordered table-striped table-hover mt-3">
                                 <thead>
                                   <tr>
