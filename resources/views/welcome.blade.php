@@ -14,7 +14,7 @@
 </head>
 <body>
     <main>
-        <header>                
+        <header>
             <!-- As a heading -->
             <nav class="navbar">
                 <div class="container-fluid">
@@ -25,7 +25,7 @@
         <section class="bg-light min-h-100">
             <div class="containter">
                 <div class="row">
-                    <div class="col-lg-6 offset-lg-3 col-md-3 offset-md-3 bg-light py-5 px-3">
+                    <div class="col-lg-6 offset-lg-3 col-md-3 offset-md-3 bg-light pt-3 pb-4 px-3">
                         @error('add_task')
                             <div class="alert alert-danger alert-dismissible fade show">
                                 <strong>Error! &nbsp; </strong>
@@ -47,7 +47,7 @@
                                 <button class="btn btn-outline-primary" type="submit">Create</button>
                             </div>
                         </form>
-                        <div class="table-responsive pt-5">            
+                        <div class="table-responsive pt-3">
                             <div class="navbar bg-light">
                                 <div class="container-fluid">
                                   <a class="navbar-brand">
@@ -68,35 +68,36 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                        $i = 1;
-                                    @endphp
+
+                                    @if(count($data) == 0)
+                                        <div class="alert alert-info" role="alert">
+                                            <strong>
+                                                {{'No task found'}}
+                                            </strong>
+                                        </div>
+                                    @else
                                     @foreach ($data as $tasks)
-                                     {{-- @if(count($transactions) > 0) --}}
-                                    <tr>
-                                        <th scope="row">
-                                            {{ $i++ }}
-                                        </th>
-                                        <td class="w-75">{{ $tasks->taskname }}</td>
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-success btn-sm">
-                                                    <a href={{"edit/".$tasks->id}} class="text-light">
+                                        <tr>
+                                            <th scope="row">
+                                                {{ $loop->iteration + (($data->currentPage() -1) * $data->perPage()) }}
+                                            </th>
+                                            <td class="w-75">{{ $tasks->taskname }}</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a href={{ Route('update', ['editid'=>$tasks->id]) }} class="text-light btn btn-success btn-sm">
                                                         <i class="fa-solid fa-pencil"></i>
                                                     </a>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-sm">
-                                                    <a href={{"/".$tasks->id}} class="text-light">
+                                                    <a href={{ Route('destroy', ['deleteid'=>$tasks->id]) }} class="text-light btn btn-danger btn-sm" id="delete">
                                                         <i class="fa-solid fa-trash-can"></i>
                                                     </a>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
-                            <span class="pagination">
+                            <span >
                                 {{ $data->links() }}
                             </span>
                         </div>
@@ -105,7 +106,7 @@
             </div>
         </section>
     </main>
-    
+
     <script src="{{'assets/js/jquery-3.6.0.min.js'}}"></script>
     <script src="{{'assets/js/bootstrap.min.js'}}"></script>
     <script src="{{'assets/js/app.js'}}"></script>

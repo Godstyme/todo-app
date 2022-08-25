@@ -21,4 +21,5 @@ Route::get('/', function () {
 
 Route::post('createTask',[TasksController::class,'save']);
 Route::get('/',[TasksController::class,'displayTask']);
-Route::get('/{id}',[TasksController::class,'destroy']);
+Route::get('/{editid}',[TasksController::class,'update'])->name('update');
+Route::get('/{deleteid}',[TasksController::class,'destroy'])->name('destroy');

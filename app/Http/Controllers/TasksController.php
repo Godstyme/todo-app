@@ -23,6 +23,11 @@ class TasksController extends Controller
         return view('welcome',['data'=>$tasks]);
     }
 
+
+
+    public function update($id){
+        return redirect()->back()->with('message',"Successfully updated a task :)");
+    }
     public function destroy($id){
         $task = AddTask::find($id);
         $task->delete();

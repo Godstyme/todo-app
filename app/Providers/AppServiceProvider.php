@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Resources\Json\PaginatedResourceResponse;
+use Illuminate\Pagination\PaginationState;
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Pagination\Paginator;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }

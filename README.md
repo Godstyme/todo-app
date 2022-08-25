@@ -24,6 +24,10 @@ $ php artisan serve
 ``` 
 
 You're ready to go! :)
+##
+Index Page with empty table              |  Index  Page with content |  Index page with error display message
+:-------------------------:|:-------------------------:|:-------------------------:
+![Screenshot](public/assets/imgs/empty.png)  |  ![Screenshot](public/assets/imgs/content.png) | ![Screenshot](public/assets/imgs/error.png)
 
 ## About Laravel
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects. Check it out in 
