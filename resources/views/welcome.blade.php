@@ -26,13 +26,24 @@
             <div class="containter">
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3 col-md-3 offset-md-3 bg-light py-5 px-3">
-                        <div class="alert alert-success" role="alert">
-                            A simple success alert—check it out!
-                        </div>
-                        <form role="search" method="post" action="">
+                        @error('add_task')
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <strong>Error! &nbsp; </strong>
+                                {{ $message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        @enderror
+                        @if(session()->has('message'))
+                            <div class="alert alert-success alert-dismissible fade show">
+                                <strong>Success! &nbsp;</strong>
+                                {{ session()->get('message') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        @endif
+                        <form  method="post" action="createTask">
                             @csrf
                             <div class="d-flex">
-                                <input class="form-control me-1" type="text" placeholder="Enter A task" name="add_task">
+                                <input class="form-control me-1 @error('add_task') is-invalid @enderror" type="text" placeholder="Enter A task" name="add_task">
                                 <button class="btn btn-outline-primary" type="submit">Create</button>
                             </div>
                         </form>
@@ -57,36 +68,37 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark Mark Mark</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-success btn-sm">
-                                                <i class="fa-solid fa-pencil"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-sm">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-success btn-sm">
-                                                <i class="fa-solid fa-pencil"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-sm">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                  </tr>
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @foreach ($data as $tasks)
+                                     {{-- @if(count($transactions) > 0) --}}
+                                    <tr>
+                                        <th scope="row">
+                                            {{ $i++ }}
+                                        </th>
+                                        <td class="w-75">{{ $tasks->taskname }}</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-success btn-sm">
+                                                    <a href={{"edit/".$tasks->id}} class="text-light">
+                                                        <i class="fa-solid fa-pencil"></i>
+                                                    </a>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-sm">
+                                                    <a href={{"/".$tasks->id}} class="text-light">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </a>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
-                              </table>
+                            </table>
+                            <span class="pagination">
+                                {{ $data->links() }}
+                            </span>
                         </div>
                     </div>
                 </div>
