@@ -23,14 +23,24 @@ class TasksController extends Controller
         return view('welcome',['data'=>$tasks]);
     }
 
-
-
-    public function update($id){
-        return redirect()->back()->with('message',"Successfully updated a task :)");
+    public function getModalData($id){
+        $data =  AddTask::find($id);
+        return view('welcome',['data'=>$data]);
     }
+
     public function destroy($id){
+        //  dd($id);
         $task = AddTask::find($id);
         $task->delete();
         return redirect()->back()->with('message',"Task has been deleted successfully :)");
     }
+
+
+    public function update(Request $req){
+        $data =  AddTask::find($req -> id);
+        $data->taskname = $req->taskname;
+        $data->save();
+        return redirect()->back()->with('message',"Successfully updated a task :)");
+    }
+
 }

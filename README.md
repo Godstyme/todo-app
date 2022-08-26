@@ -16,7 +16,8 @@ $ git clone https://github.com/Godstyme/todo-app.git
 $ cd todo-app
 $ composer install
 ```
-Setup database by creating a database called `todo_app` in your phpMyAdmin or quickly confirm database name in `.env` file and create the name of the database in phpMyAdmin
+Setup database by creating a database called `todo_app` in your `phpMyAdmin`. This example uses the `todo_app` database as configured in the app `.env` file.
+We have to use a migration command to prepare the database migration classes for the target tables.
 
 ```sh
 $ php artisan migrate
