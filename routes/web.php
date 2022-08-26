@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('createTask',[TasksController::class,'save']);
-Route::get('/',[TasksController::class,'displayTask']);
+Route::post('createTask',[TasksController::class,'create']);
+Route::get('/',[TasksController::class,'index']);
 Route::get('/{deleteid}',[TasksController::class,'destroy'])->name('destroy');
-Route::get('/{id}',[TasksController::class,'getModalData'])->name('showData');
+Route::get('/{id}',[TasksController::class,'show'])->name('showData');
 Route::post('/{updateid}',[TasksController::class,'update']);

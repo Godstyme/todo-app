@@ -8,6 +8,7 @@ This project provides a basic introduction to the Laravel framework and includes
 - View route, post route and get route
 - Pagination and 
 - CSRF Protection
+- Proccessing of request using ajax call
 
 ## Quick Installation
 First, clone repo and install all dependencies.
@@ -20,7 +21,7 @@ Setup database by creating a database called `todo_app` in your `phpMyAdmin`. Th
 We have to use a migration command to prepare the database migration classes for the target tables.
 
 ```sh
-$ php artisan migrate
+$ php artisan make:model Task --migration
 $ php artisan serve
 ``` 
 

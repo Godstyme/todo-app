@@ -5,6 +5,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <meta name="_token" content="{{csrf_token()}}" />
    <title>{{ config('app.name') }}</title>
    <link rel="stylesheet" href="{{ 'assets/css/bootstrap.min.css' }}">
    <link rel="stylesheet" href="{{ 'assets/css/css/all.css' }}">
@@ -42,8 +43,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                      </div>
                   @endif
-                  <form method="post" action="createTask">
-                     @csrf
+                  <form method="post" id="createTask">
+                     {{-- @csrf --}}
                      <div class="d-flex">
                         <input class="form-control me-1 @error('add_task') is-invalid @enderror" type="text"
                            placeholder="Enter A task" name="add_task">
@@ -116,16 +117,16 @@
                                                 <form action="/edit" method="post">
                                                    @csrf
                                                    <input type="hidden" name="id"  value="{{$tasks->id}}" >
-                                                   <div class="form-group">
-                                                      <label for="exampleInputTask">Task Name</label>
-                                                      <input type="text" class="form-control"
-                                                            id="exampleInputTask"
-                                                            aria-describedby="emailHelp" name="taskname"
-                                                            value="{{ $tasks->taskname }}">
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                    <button type="submit"
-                                                       class="btn btn-primary">Update</button>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputTask">Task Name</label>
+                                                        <input type="text" class="form-control"
+                                                                id="exampleInputTask"
+                                                                aria-describedby="emailHelp" name="taskname"
+                                                                value="{{ $tasks->taskname }}">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit"
+                                                        class="btn btn-primary">Update</button>
                                                     </div>
                                                 </form>
                                              </div>
@@ -152,6 +153,36 @@
    <script src="{{ 'assets/js/jquery-3.6.0.min.js' }}"></script>
    <script src="{{ 'assets/js/bootstrap.min.js' }}"></script>
    <script src="{{ 'assets/js/app.js' }}"></script>
+   {{-- <script src="{{ 'assets/js/request.js' }}" defer></script> --}}
+   <script>
+        $(document).ready(function($) {
+            $("#createTask").submit(function(evt) {
+                evt.preventDefault();
+                var url = "{{ url('createTask') }}";
+                // var url = '{{ url('postinsert') }}'
+
+                // console.log(url)
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: url,
+                    method : "post",
+                    dataType:'json',
+                    data:$(this).serialize(),
+                    success: function (response) {
+                        console.log(response.message);
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                })
+            })
+        })
+
+   </script>
 </body>
 
 </html>

@@ -8,22 +8,29 @@ use App\Models\AddTask;
 
 class TasksController extends Controller
 {
-    public function save(Request $request){
+
+    public function create(Request $request){
         $this->validate($request,[
             'add_task'=>'required|max:50'
         ]);
         $data = new AddTask;
         $data->taskname = $request->add_task;
         $data->save();
-        return redirect()->back()->with('message',"Successfully inserted a task :)");
+        // return redirect()->back()->with('message',"Successfully inserted a task :)");
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Data inserted successfully'
+            ]
+        );
     }
 
-    public function displayTask(){
+    public function index(){
         $tasks = AddTask::paginate(5);
         return view('welcome',['data'=>$tasks]);
     }
 
-    public function getModalData($id){
+    public function show($id){
         $data =  AddTask::find($id);
         return view('welcome',['data'=>$data]);
     }
@@ -40,7 +47,7 @@ class TasksController extends Controller
         $data =  AddTask::find($req -> id);
         $data->taskname = $req->taskname;
         $data->save();
-        return redirect()->back()->with('message',"Successfully updated a task :)");
+        return redirect()->back()->with('message',"Task is successfully updated :)");
     }
 
 }
