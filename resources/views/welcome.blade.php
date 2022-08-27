@@ -212,16 +212,22 @@
             $("#delete").click(function(evt) {
                 evt.preventDefault();
                 let url = "{{ url('/{deleteid}') }}";
-                $.ajaxSetup({
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                //     }
+                // });
+                $.ajax({
+                    method : "post",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                $.ajax({
+                    },
                     url: url,
-                    method : "post",
                     dataType:'json',
-                    data:$(this).serialize(),
+
+                    data:{
+                    '_method': 'delete'
+                    },
                     success: function (response) {
                         // if(response.success){
                         // }
