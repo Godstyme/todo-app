@@ -32,8 +32,8 @@
                   <div id="errorMSG"></div>
                   @if (session()->has('message'))
                      <div class="alert alert-success alert-dismissible fade show">
-                        {{-- <strong>Success! &nbsp;</strong>
-                        {{ session()->get('message') }} --}}
+                        <strong>Success! &nbsp;</strong>
+                        {{ session()->get('message') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                      </div>
                   @endif
@@ -51,12 +51,11 @@
                            </a>
                            <form class="d-flex" role="search">
                               <input class="form-control me-1" type="search" placeholder="Search"
-                                 aria-label="Search">
-                              <button class="btn btn-outline-primary" type="submit">Search</button>
+                                 aria-label="Search" id="searchText">
                            </form>
                         </div>
                      </div>
-                     <table class="table  table-bordered table-striped table-hover mt-3">
+                     <table class="table  table-bordered table-striped table-hover mt-3"  id="dataTable">
                         <thead>
                            <tr>
                               <th scope="col">#</th>
@@ -194,44 +193,12 @@
                     data:$(this).serialize(),
                     success: function (response) {
                         if(response.success){
-                            // $("#errorMessage").removeClass('alert alert-danger alert-dismissible fade show');
-                            // $("#errorMessage").addClass('alert alert-success alert-dismissible fade show');
-                            // $("#errorMessage").append('<div id="new-block-2">ghdggh</div>');
+                            $("#errorMessage").removeClass('alert alert-danger alert-dismissible fade show');
+                            $("#errorMessage").addClass('alert alert-success alert-dismissible fade show');
                             $("#errorMessage").html(response.message);
-                            // $("#exampleInputTask").val('');
+                            $("#exampleInputTask").val('');
                         }
                         console.log(response.message)
-                    },
-                    error: function (response) {
-                        // console.log('Error: ',response);
-                    }
-                })
-            })
-
-
-            $("#delete").click(function(evt) {
-                evt.preventDefault();
-                let url = "{{ url('/{deleteid}') }}";
-                // $.ajaxSetup({
-                //     headers: {
-                //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                //     }
-                // });
-                $.ajax({
-                    method : "post",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    },
-                    url: url,
-                    dataType:'json',
-
-                    data:{
-                    '_method': 'delete'
-                    },
-                    success: function (response) {
-                        // if(response.success){
-                        // }
-                        console.log(response.message);
                     },
                     error: function (response) {
                         console.log('Error: ',response);

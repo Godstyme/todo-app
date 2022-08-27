@@ -25,7 +25,7 @@ $ php artisan make:model Task --migration
 $ php artisan serve
 ``` 
 
-You're ready to go! :)
+You're ready to go! :)<br>
 Don't forget to star the project :)
 ##
 Index Page with empty table              |  Index  Page with content |  Index page with error display message
