@@ -26,6 +26,7 @@ $ php artisan serve
 ``` 
 
 You're ready to go! :)
+Don't forget to star the project :)
 ##
 Index Page with empty table              |  Index  Page with content |  Index page with error display message
 :-------------------------:|:-------------------------:|:-------------------------:

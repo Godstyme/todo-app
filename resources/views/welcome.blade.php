@@ -29,25 +29,17 @@
          <div class="containter">
             <div class="row">
                <div class="col-lg-6 offset-lg-3 col-md-3 offset-md-3 bg-light pt-3 pb-4 px-3">
-                  @error('add_task')
-                     <div class="alert alert-danger alert-dismissible fade show">
-                        <strong>Error! &nbsp; </strong>
-                        {{ $message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                     </div>
-                  @enderror
+                  <div id="errorMSG"></div>
                   @if (session()->has('message'))
                      <div class="alert alert-success alert-dismissible fade show">
-                        <strong>Success! &nbsp;</strong>
-                        {{ session()->get('message') }}
+                        {{-- <strong>Success! &nbsp;</strong>
+                        {{ session()->get('message') }} --}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                      </div>
                   @endif
-                  <form method="post" id="createTask">
-                     {{-- @csrf --}}
+                  <form method="post" id="createTask" class="needs-validation" novalidate>
                      <div class="d-flex">
-                        <input class="form-control me-1 @error('add_task') is-invalid @enderror" type="text"
-                           placeholder="Enter A task" name="add_task">
+                           <input type="text" class="form-control me-1"  name="add_task" id="txtAddTask" required>
                         <button class="btn btn-outline-primary" type="submit">Create</button>
                      </div>
                   </form>
@@ -114,8 +106,7 @@
                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                              </div>
                                              <div class="modal-body">
-                                                <form action="/edit" method="post">
-                                                   @csrf
+                                                <form method="post" class="edit">
                                                    <input type="hidden" name="id"  value="{{$tasks->id}}" >
                                                     <div class="form-group">
                                                         <label for="exampleInputTask">Task Name</label>
@@ -129,6 +120,7 @@
                                                         class="btn btn-primary">Update</button>
                                                     </div>
                                                 </form>
+                                                <div id="errorMessage"></div>
                                              </div>
 
                                           </div>
@@ -153,15 +145,12 @@
    <script src="{{ 'assets/js/jquery-3.6.0.min.js' }}"></script>
    <script src="{{ 'assets/js/bootstrap.min.js' }}"></script>
    <script src="{{ 'assets/js/app.js' }}"></script>
-   {{-- <script src="{{ 'assets/js/request.js' }}" defer></script> --}}
+   <script src="{{ 'assets/js/request.js' }}" defer></script>
    <script>
         $(document).ready(function($) {
             $("#createTask").submit(function(evt) {
                 evt.preventDefault();
-                var url = "{{ url('createTask') }}";
-                // var url = '{{ url('postinsert') }}'
-
-                // console.log(url)
+                let url = "{{ url('createTask') }}";
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -173,10 +162,73 @@
                     dataType:'json',
                     data:$(this).serialize(),
                     success: function (response) {
+                        if(response.success){
+                            $("#errorMSG").removeClass('alert alert-danger alert-dismissible fade show');
+                            $("#errorMSG").addClass('alert alert-success alert-dismissible fade show');
+                            $("#errorMSG").html(response.message);
+                            $("#txtAddTask").val('');
+                        }
+                        // console.log(response.message);
+                    },
+                    error: function (response) {
+                        // console.log('Error: ',response);
+                        $("#errorMSG").removeClass('alert alert-success alert-dismissible fade show');
+                        $("#errorMSG").addClass('alert alert-danger alert-dismissible fade show');
+                        $('#errorMSG').text(response.responseJSON.errors.add_task);
+                    }
+                })
+            })
+
+            $(".edit").submit(function(evt) {
+                evt.preventDefault();
+                let url = "{{ url('/{updateid}') }}";
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: url,
+                    method : "post",
+                    dataType:'json',
+                    data:$(this).serialize(),
+                    success: function (response) {
+                        if(response.success){
+                            // $("#errorMessage").removeClass('alert alert-danger alert-dismissible fade show');
+                            // $("#errorMessage").addClass('alert alert-success alert-dismissible fade show');
+                            // $("#errorMessage").append('<div id="new-block-2">ghdggh</div>');
+                            $("#errorMessage").html(response.message);
+                            // $("#exampleInputTask").val('');
+                        }
+                        console.log(response.message)
+                    },
+                    error: function (response) {
+                        // console.log('Error: ',response);
+                    }
+                })
+            })
+
+
+            $("#delete").click(function(evt) {
+                evt.preventDefault();
+                let url = "{{ url('/{deleteid}') }}";
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: url,
+                    method : "post",
+                    dataType:'json',
+                    data:$(this).serialize(),
+                    success: function (response) {
+                        // if(response.success){
+                        // }
                         console.log(response.message);
                     },
                     error: function (response) {
-                        console.log(response);
+                        console.log('Error: ',response);
                     }
                 })
             })

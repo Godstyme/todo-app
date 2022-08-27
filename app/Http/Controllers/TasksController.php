@@ -16,11 +16,10 @@ class TasksController extends Controller
         $data = new AddTask;
         $data->taskname = $request->add_task;
         $data->save();
-        // return redirect()->back()->with('message',"Successfully inserted a task :)");
         return response()->json(
             [
                 'success' => true,
-                'message' => 'Data inserted successfully'
+                'message' => 'Task inserted successfully'
             ]
         );
     }
@@ -39,7 +38,13 @@ class TasksController extends Controller
         //  dd($id);
         $task = AddTask::find($id);
         $task->delete();
-        return redirect()->back()->with('message',"Task has been deleted successfully :)");
+        // return redirect()->back()->with('message',"Task has been deleted successfully :)");
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Task is successfully deleted :)'
+            ]
+        );
     }
 
 
@@ -47,7 +52,12 @@ class TasksController extends Controller
         $data =  AddTask::find($req -> id);
         $data->taskname = $req->taskname;
         $data->save();
-        return redirect()->back()->with('message',"Task is successfully updated :)");
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Task is successfully updated :)'
+            ]
+        );
     }
 
 }
