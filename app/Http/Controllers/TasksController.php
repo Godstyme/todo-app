@@ -65,7 +65,7 @@ class TasksController extends Controller
             ]
         );
     }
-
+// regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/
     // public function index(Request $request,AddTask $addTask){
 
     //     if ($request->ajax()) {
