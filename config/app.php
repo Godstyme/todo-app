@@ -57,6 +57,9 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL'),
+    // We need to set the error log to Heroku error log.
+    // With this, you can view your app error log on your Heroku dashboard.
+    "log"=>"errorlog",
 
     /*
     |--------------------------------------------------------------------------
