@@ -32,7 +32,7 @@
                   <div id="errorMSG"></div>
                   @if (session()->has('message'))
                      <div class="alert alert-success alert-dismissible fade show">
-                        <strong>Success! &nbsp;</strong>
+                        <strong>Success! &nbsp; </strong>
                         {{ session()->get('message') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                      </div>
