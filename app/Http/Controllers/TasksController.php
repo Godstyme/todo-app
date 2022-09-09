@@ -20,7 +20,7 @@ class TasksController extends Controller
             [
                 'success' => true,
                 'message' => 'Task inserted successfully'
-            ]
+            ], 200
         );
     }
 
