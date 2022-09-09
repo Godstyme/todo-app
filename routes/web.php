@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('createTask',[TasksController::class,'create']);
+Route::post('createTask',[TasksController::class,'create'],'https');
 Route::get('/',[TasksController::class,'index']);
 Route::get('/{deleteid}',[TasksController::class,'destroy'])->name('destroy');
 Route::get('/{id}',[TasksController::class,'show'])->name('showData');
