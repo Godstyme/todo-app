@@ -13,6 +13,7 @@
    <link rel="stylesheet" href="{{ 'assets/css/css/brands.css' }}">
    <link rel="stylesheet" href="{{ 'assets/css/css/solid.css' }}">
    <link rel="stylesheet" href="{{ 'assets/css/style.css' }}">
+   <link rel="shortcut icon" href="{{ 'assets/imgs/todo.png' }}" type="image/x-icon">
 </head>
 
 <body>
