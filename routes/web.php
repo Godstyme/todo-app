@@ -17,11 +17,12 @@ use App\Http\Controllers\Registration;
 |
 */
 
-
-Route::resource('login',Login::class);
-Route::resource('Registration',Registration::class);
+Route::get('/login',[Login::class,'create'])->name('login');
+Route::get('/logout',[Login::class,'logout']);
+Route::get('/registration',[Registration::class,'create']);
+Route::post('registration',[Registration::class,'store']);
 Route::post('createTask',[TasksController::class,'create']);
-Route::get('/',[TasksController::class,'index']);
+Route::get('/',[TasksController::class,'index'])->middleware("auth")->name('home');
 Route::get('/{deleteid}',[TasksController::class,'destroy'])->name('destroy');
 Route::get('/{id}',[TasksController::class,'show'])->name('showData');
 Route::post('/{updateid}',[TasksController::class,'update']);

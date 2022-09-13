@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row pt-5">
             <div class="col-lg-5 offset-lg-3 col-md-5 offset-md-4 px-5">
-                <p class="text-center">Log in to the App</p>
+                <p class="text-center fw-bolder">Log in to your account</p>
                 <form class="row g-3" action="" method="post">
                     @csrf
                     <div class="col-md-12">
@@ -19,7 +19,7 @@
                     </div>
                 </form>
                 <div>
-                    <p>Don't have an account? <span><a href="">Register</a></span></p>
+                    <p>Don't have an account ?&nbsp; &nbsp;<span><a href="{{url('registration')}}">Register</a></span></p>
                 </div>
             </div>
         </div>

@@ -23,7 +23,9 @@
          <nav class="navbar">
             <div class="container-fluid">
                <span class="navbar-brand mb-0 h1">{{ ucwords(config('app.name')) }}</span>
+               <a href="{{url('logout')}}" class="btn btn-primary">Logout</a>
             </div>
+
          </nav>
       </header>
       <section class="bg-light min-h-100">

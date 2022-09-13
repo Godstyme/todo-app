@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Login extends Controller
 {
@@ -11,10 +13,10 @@ class Login extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('login');
-    }
+    // public function index()
+    // {
+    //     return view('login');
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -23,7 +25,7 @@ class Login extends Controller
      */
     public function create()
     {
-        //
+        return view('login');
     }
 
     /**
@@ -77,8 +79,11 @@ class Login extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function logout()
     {
-        //
+        // Session::flush();
+
+        Auth::logout();
+        return redirect('login');
     }
 }

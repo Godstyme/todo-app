@@ -27,7 +27,7 @@ class TasksController extends Controller
     public function index(AddTask $addTask){
         $tasks = $addTask->paginate(5);
         // $tasks = AddTask::paginate(5);
-        return view('login',['data'=>$tasks]);
+        return view('welcome',['data'=>$tasks]);
     }
 
     public function show($id, AddTask $addTask){
