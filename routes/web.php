@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\Login;
+use App\Http\Controllers\Registration;
 
 
 /*
@@ -15,10 +17,9 @@ use App\Http\Controllers\TasksController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::resource('login',Login::class);
+Route::resource('Registration',Registration::class);
 Route::post('createTask',[TasksController::class,'create']);
 Route::get('/',[TasksController::class,'index']);
 Route::get('/{deleteid}',[TasksController::class,'destroy'])->name('destroy');
