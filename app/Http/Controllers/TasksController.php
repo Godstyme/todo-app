@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AddTask;
+use App\Models\User;
+use Illuminate\Console\View\Components\Task;
+use Illuminate\Support\Facades\Auth;
+
 // use Illuminate\Support\Facades\DB;
 
 class TasksController extends Controller
@@ -11,10 +15,12 @@ class TasksController extends Controller
 
     public function create(Request $request){
         $this->validate($request,[
-            'add_task'=>'required|max:50'
+            'add_task'=>'required|max:50|between:5,250'
         ]);
         $data = new AddTask;
         $data->taskname = $request->add_task;
+        $id = Auth::user()->id;
+        $data->users_id = $id;
         $data->save();
         return response()->json(
             [
@@ -25,8 +31,7 @@ class TasksController extends Controller
     }
 
     public function index(AddTask $addTask){
-        $tasks = $addTask->paginate(5);
-        // $tasks = AddTask::paginate(5);
+        $tasks = AddTask::where('users_id',Auth::id())->paginate(5);
         return view('welcome',['data'=>$tasks]);
     }
 

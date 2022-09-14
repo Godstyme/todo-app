@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('todoapptbl', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('users_id')
+            ->nullable();
+            $table->foreign('users_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('set null');
             $table->string('taskname');
             $table->timestamps();
         });
