@@ -32,6 +32,9 @@ Login Page             |  Registration  Page |  Home Page
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Screenshot](public/assets/imgs/login.png)  |  ![Screenshot](public/assets/imgs/register.png) | ![Screenshot](public/assets/imgs/index.png)
 
+## Deployment
+https://simple-laravel-todo-task.herokuapp.com/
+
 ## About Laravel
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects. Check it out in 
 - https://laravel.com/
