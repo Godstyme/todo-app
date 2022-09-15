@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Session\Session;
+// use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,12 +26,19 @@ class Login extends Controller
      */
     public function login(Request $request)
     {
-        $request->validate([
-            'name' =>   'required|string|min:5|max:50',
-            'email' => 'required|string|email|max:60|unique:users',
-            'password' => 'required|min:8'
+        $userValidate = $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+
         ]);
-        !Auth::attempt($request->only('email', 'password'));
+
+        $credentials = Auth::attempt($request->only('email', 'password'));
+        if ($credentials) {
+            return redirect()->route('home')->with("message","You have Successfully logged in");
+        } else {
+            return redirect("login")->with("error",'Oppes! You have entered invalid credentials');
+        }
+
     }
 
 
