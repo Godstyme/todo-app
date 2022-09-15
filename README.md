@@ -28,7 +28,7 @@ $ php artisan serve
 You're ready to go! :)<br>
 Don't forget to star the project :)
 ##
-Index Page with login table              |  Registration  Page with content |  Index page with error display message
+Login Page             |  Registration  Page |  Home Page
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Screenshot](public/assets/imgs/login.png)  |  ![Screenshot](public/assets/imgs/register.png) | ![Screenshot](public/assets/imgs/index.png)
 
